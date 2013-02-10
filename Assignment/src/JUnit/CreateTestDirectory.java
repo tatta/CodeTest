@@ -15,45 +15,63 @@ import org.junit.Test;
  * 
  */
 public class CreateTestDirectory {
-	File file = new File("/home.....");
+	File folder = new File("/home/arja/Desktop/test2");
+	File textFileA = new File(folder, "A.txt");
+	File textFileB = new File(folder, "B.txt");
+	File textFileC = new File(folder, "C.txt");
+	File childFolder = new File(folder, "childFolder");
+	File childTextFileD = new File(childFolder, "D.txt");
+	File childTextFileE = new File(childFolder, "E.txt");
 
 	@Before
 	public void setUp() throws Exception {
 
-		if (file.mkdir()) {
+		if (folder.mkdir()) {
 			System.out.println("Created directory");
-			if (file.createNewFile()) {
-				System.out.println("Created file");
-				if (file.mkdirs()) {
-					System.out.println("Created directory");
-					if (file.createNewFile()) {
-						System.out.println("Created file");
-					}
-				}
-			} else
-				System.out.println("no file created");
-		} else
-			System.out.println("No directory created");
-		if (file.mkdirs()) {
-			System.out.println("Created directory");
-			if (file.createNewFile()) {
-				System.out.println("Created file");
-				if (file.mkdirs()) {
-					System.out.println("Created directory");
-					if (file.createNewFile()) {
-						System.out.println("Created file");
-					}
-				}
-			} else
-				System.out.println("no file created");
-		} else
-			System.out.println("No directory created");
+			textFileA.createNewFile();
+			textFileB.createNewFile();
+			textFileC.createNewFile();
 
+			childFolder.mkdir();
+			childTextFileD.createNewFile();
+			childTextFileE.createNewFile();
+
+			textFileA.setReadOnly();
+			textFileB.setExecutable(false);
+			textFileC.setWritable(false);
+
+		}
 	}
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		assertTrue(folder.exists());
+		assertTrue(textFileA.exists());
+		assertTrue(textFileB.exists());
+		assertTrue(textFileC.exists());
+
+		assertTrue(folder.isDirectory());
+		assertTrue(textFileA.isFile());
+
+		assertTrue(textFileA.exists());
+		assertTrue(textFileB.exists());
+		assertTrue(textFileC.exists());
+
+		assertTrue(childFolder.isDirectory());
+		assertTrue(childTextFileD.isFile());
+		assertTrue(childTextFileE.isFile());
+
+		assertTrue(textFileA.canRead());
+		assertFalse(textFileA.canWrite());
+		assertFalse(textFileA.canExecute());
+
+		assertTrue(textFileB.canRead());
+		assertTrue(textFileB.canWrite());
+		assertFalse(textFileB.canExecute());
+
+		assertTrue(textFileC.canRead());
+		assertFalse(textFileC.canWrite());
+		assertFalse(textFileC.canExecute());
 	}
 
 }

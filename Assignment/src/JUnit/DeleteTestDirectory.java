@@ -8,14 +8,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * JUnit test case for creating deleting the test directory
  * 
  * Enter path below
  * 
  * @author Siddhartha Pattni
- *
+ * 
  */
 public class DeleteTestDirectory {
 
@@ -25,16 +24,27 @@ public class DeleteTestDirectory {
 
 	@After
 	public void tearDown() throws Exception {
-		File file = new File("/home.......");		
-		if(file.delete())		
-			System.out.println("Deleted file");
-		else
-			System.out.println("No file deleted");
+
 	}
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		File folder = new File("/home/arja/Desktop/test2");
+		File textFileA = new File(folder, "A.txt");
+		File textFileB = new File(folder, "B.txt");
+		File textFileC = new File(folder, "C.txt");
+		File childFolder = new File(folder, "childFolder");
+		File childTextFileD = new File(childFolder, "D.txt");
+		File childTextFileE = new File(childFolder, "E.txt");
+		assertTrue(childTextFileE.delete());
+		assertTrue(childTextFileD.delete());
+		assertTrue(childFolder.delete());
+
+		assertTrue(textFileC.delete());
+		assertTrue(textFileB.delete());
+		assertTrue(textFileA.delete());
+
+		assertTrue(folder.delete());
 	}
 
 }
