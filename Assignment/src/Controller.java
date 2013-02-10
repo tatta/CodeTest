@@ -39,21 +39,21 @@ public class Controller {
 				view.printList(model.getSortedList(model.getListFiles()));
 				break;
 			case ArgumentInterpreter.LS_R:
-				view.printList(model.getSortedList(getAllFilesRecursiv()));
+				view.printList(model.getSortedList(getAllFilesRecursive()));
 				break;
 			case ArgumentInterpreter.LS_LC:
 				view.printList(createDetailedList(model.getSortedList(model
 						.getListFiles())));
 				break;
 			case ArgumentInterpreter.LS_RC:
-				view.printList(model.getSortedList(getAllFilesRecursiv()));
+				view.printList(model.getSortedList(getAllFilesRecursive()));
 				break;
 			case ArgumentInterpreter.LS_LR:
-				view.printList(createDetailedList(getAllFilesRecursiv()));
+				view.printList(createDetailedList(getAllFilesRecursive()));
 				break;
 			case ArgumentInterpreter.LS_LCR:
 				view.printList(createDetailedList(model
-						.getSortedList(getAllFilesRecursiv())));
+						.getSortedList(getAllFilesRecursive())));
 				break;
 			}
 		}
@@ -95,7 +95,7 @@ public class Controller {
 
 	}
 
-	public File[] getAllFilesRecursiv() {
+	public File[] getAllFilesRecursive() {
 		recursion(model.getFile());
 		File[] temp = new File[model.getListFiles().length];
 		for (int i = 0; i < recursiveNames.size(); i++) {
